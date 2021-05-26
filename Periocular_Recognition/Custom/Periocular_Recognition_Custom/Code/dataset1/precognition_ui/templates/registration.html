@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image:url("{{url_for('static', filename='p.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+}
+
+.topnav a  {
+  float: right;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(158, 81, 230);
+  color: black;
+}
+
+.topnav a.home {
+  float: left;
+  background-color: #000000;
+  padding: 7px;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  justify-content: center;
+  margin-top: -15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=tel], input[type=email] {
+  width: 98%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  background: transparent;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus, input[type=email]:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #1f1e1e !important;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #2d0142;
+  color: white;
+  font-size: larger;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: rgb(14, 10, 240);
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color:transparent;
+  text-align: center;
+}
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  background-color: rgb(245, 223, 28); /* Black background color */
+  color: rgb(0, 0, 0); /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 3px; /* Padding */
+  position: relative; /* Sit on top of the screen */
+  float: right;
+  z-index: 1; /* Add a z-index if needed */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar2 {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: rgb(174, 255, 248); /* Black background color */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 12px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 70px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar2.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar3 {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: rgb(41, 250, 76); /* Black background color */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 12px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 70px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar3.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+</style>
+
+<script>
+    var users = [];
+    var deets = [];
+
+    function showtoast() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function showtoast2() {
+        var x = document.getElementById("snackbar2");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function showtoast3() {
+        var x = document.getElementById("snackbar3");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function registered() {
+        var pwd1 = document.getElementById("psw").value
+        var pwd2 = document.getElementById("psw-repeat").value
+        if (pwd1 != pwd2) {
+            showtoast();
+        }
+        else {
+            var usn = document.getElementById("email").value;
+            if (users.includes(usn) == true)
+            {
+    	        showtoast2();
+            }
+            else {
+                users.push(usn);
+                var person = {
+                    em: document.getElementById("email").value,
+                    ps: document.getElementById("psw").value
+                };
+                deet = person.em.concat("&").concat(person.ps);
+                deets.push(deet);
+                document.getElementById("firstname").value = ""
+                document.getElementById("lastname").value = ""
+                document.getElementById("phno").value = ""
+                document.getElementById("email").value = ""
+                document.getElementById("psw").value = ""
+                document.getElementById("psw-repeat").value = ""
+                showtoast3();
+                let all_users;
+                let all_deets;
+                all_users = JSON.stringify(users);
+                all_deets = JSON.stringify(deets);
+                localStorage.setItem("clients", all_users);
+                localStorage.setItem("clients_info", all_deets);
+                localStorage.setItem("set", "yes");
+            }
+        }
+    }
+</script>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+  <a href="tech.html">Technology</a>
+  <a href="about.html">About</a>
+</div>
+
+<form onsubmit="return false">
+    <div class="container">
+      <h1 style="text-align: center;">Register With Us</h1>
+      <p style="text-align: center;">Please fill in your details</p>
+      <hr>
+      <br>
+      <label for="firstname"><b>First Name</b></label>
+      <input type="text" placeholder="Enter First name" name="firstname" id="firstname" required><br>
+  
+      <label for="lastname"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last name" name="lastname" id="lastname" required><br>
+  
+      <label for="phno"><b>Phone No</b></label>
+      <input type="tel" placeholder="Enter Phone Number" name="phno" id="phno" required><br>
+  
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" id="email" required><br>
+  
+      <label for="psw"><b>Password</b></label>
+      <span id="snackbar">Passwords Dont Match, Re-Enter</span>
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+  
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+      <p>By creating an account you agree to our <a href="#">Terms & Conditions</a>.</p>
+  
+      <button onclick="registered()" class="registerbtn">REGISTER</button>
+      <span id="snackbar2">You are already registered with us</span>
+      <span id="snackbar3">Successfully Registered</span>
+    </div>
+    
+    <div class="container signin">
+      <br><br>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Already have an account? <a href="ui.html">Sign in</a>.</p>
+    </div>
+  </form>
+
+</body>
+</html>

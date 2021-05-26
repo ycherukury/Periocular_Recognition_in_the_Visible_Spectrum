@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image: url("{{url_for('static', filename='p.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.recognize-section {
+  padding: 30px;
+  text-align: center;
+  background-color: #00ffff;
+  color: rgb(0, 0, 0);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+}
+      
+.topnav a  {
+    float: right;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+      
+.topnav a:hover {
+    background-color: rgb(158, 81, 230);
+    color: black;
+}
+      
+.topnav a.home {
+    float: left;
+    background-color: #000000;
+    padding: 7px;
+}
+
+.topnav a.active {
+    background-color: #033d3d;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #000000;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 40px;
+  padding: 50px;
+  width: 800px;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: calc(50% - 400px);
+}
+
+.button:hover {
+  background-color: #ff0000;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+#finish_button {
+    visibility: hidden;
+}
+
+#finish_button.show {
+    display: block;
+    visibility:visible;
+    border-radius: 4px;
+    background-color: #4400ff;
+    border: none;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 30px;
+    padding: 15px;
+    width: 200px;
+    cursor: pointer;
+    float: right;
+    margin-top: 40px;
+    margin-right: 40px;
+    opacity: 0.9;
+}
+
+#finish_button.show:hover {
+    opacity: 1;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 60%; /* Full width */
+  height: 90%; /* Full height */
+  background-color: rgb(238, 15, 15); /* Fallback color */
+  background-color: rgb(126, 242, 250); /* Black w/ opacity */
+  padding-top: 80px;
+  margin-top: 60px;
+  margin-left: 310px;
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+  background-image: url("{{url_for('static', filename='login.jpg') }}");
+  background-repeat: no-repeat;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  height: 100%;
+  margin-top: -40px;
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+#loader {
+  visibility: hidden;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-right: 16px solid rgb(1, 255, 255);
+  border-bottom: 16px solid rgb(49, 178, 238);
+  border-left: 16px solid rgb(5, 41, 87);
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+#loader.show {
+    visibility: visible;
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid blue;
+    border-right: 10px solid rgb(1, 255, 255);
+    border-bottom: 10px solid rgb(49, 178, 238);
+    border-left: 10px solid rgb(5, 41, 87);
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite, cssAnimation 10s forwards; 
+    animation: spin 2s linear infinite, cssAnimation 10s forwards;
+    float: right;
+    position: relative;
+    margin-right: 270px;
+    margin-top: -465px;
+}
+
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    width: 15%;
+    background-color: rgb(253, 249, 0); /* Black background color */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 12px; /* Padding */
+    z-index: 1; /* Add a z-index if needed */
+    margin-top: -445px;
+    float: right;
+    margin-right: 30px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s, cssAnimation 10s forwards;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s, cssAnimation 10s forwards;
+}
+
+#ac {
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s, cssAnimation 10s forwards;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s, cssAnimation 10s forwards;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+</style>
+
+<script>
+    function get_dataset() {
+	//enter link to database to access from UI.
+        drive_window = window.open('https://drive.google.com/drive/folders/1up-52I9EnVrhe3gUnx2iBp8z98GyGsPj', 'drive_window', "width=1000,height=500,top=200,left=250,");
+    }
+
+    function rec() {
+      window.location = "pr.html";
+    }
+
+    function train() {
+        var x = document.getElementById("loader");
+        x.className="show";
+        var y = document.getElementById("snackbar");
+        y.className="show";
+        //window.location = "train.html";
+    }
+    function acc() {
+      window.location = "acc.html";
+    }s
+
+    //document.getElementById('mod').style.display='block'"
+</script>
+      
+<div class="topnav">
+    <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+    <a href="tech.html">Technology</a>
+    <a href="about.html">About</a>
+</div>
+
+<div style="margin-top: 15px;">
+    <button class="button" onclick="get_dataset()"><span>Create/Edit Dataset</span></button>
+    <button class="button" onclick="train()"><span>Train Model</span></button>
+    <button class="button" onclick="acc()"><span>Get Model Accuracy</span></button>
+    <h1 id="ac" style="position: absolute;left: 1200px;top: 400px;font-size: 50px;">{{accuracy}}</h1>
+    <button class="button" onclick="rec()"><span>Proceed to Recognize</span></button>
+    <div id="loader"></div>
+    <div id="snackbar">Training Model</div>
+</div>
+
+<div id="loader"></div>
+
+<!-- The Modal -->
+<div id="mod" class="modal">
+    <span onclick="document.getElementById('mod').style.display='none'"
+  class="close" title="Close Modal">&times;</span>
+  
+    <!-- Modal Content -->
+</div>
+
+</head>
+</body>
+</html>

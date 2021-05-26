@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image: url("{{url_for('static', filename='logo.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+}
+
+.topnav a  {
+  float: right;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(158, 81, 230);
+  color: black;
+}
+
+.topnav a.home {
+  float: left;
+  background-color: #000000;
+  padding: 7px;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #000000;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 40px;
+  padding: 50px;
+  width: 800px;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: calc(50% - 400px);
+}
+
+.btn-group {
+  margin-top: calc(50% - 86px);
+} 
+
+.button:hover {
+  background-color: #ff0000;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 60%; /* Full width */
+  height: 60%; /* Full height */
+  background-color: rgb(238, 15, 15); /* Fallback color */
+  background-color: rgb(126, 242, 250); /* Black w/ opacity */
+  padding-top: 80px;
+  margin-top: 130px;
+  margin-left: 310px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-image: url("{{url_for('static', filename='login.jpg') }}");
+  background-repeat: no-repeat;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  height: 100%;
+  margin-top: -40px;
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+input[type=text], input[type=password] {
+  padding: 9px;
+  margin-left: 35px;
+  display: inline-block;
+  background: transparent;
+}
+
+label {
+  margin-left: 35px;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+.loginbtn {
+  background-color: #2d0142;
+  color: white;
+  font-size: larger;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 35px;
+  margin-top: 20px;
+  width: 29%;
+  opacity: 0.9;
+}
+
+.loginbtn:hover {
+  opacity: 1;
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 100px; /* Set a default minimum width */
+    width: 30%;
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: rgb(250, 41, 41); /* Black background color */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 12px; /* Padding */
+    position: relative; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 22%;
+    margin-top: 5px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar2 {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 100px; /* Set a default minimum width */
+    width: 33%;
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: rgb(250, 41, 41); /* Black background color */
+    color: rgb(0, 0, 0); /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 12px; /* Padding */
+    position: relative; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 21%;
+    margin-top: -40px;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar2.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+</style>
+
+<script>
+  var set;
+  set = false;
+  var is_set;
+  is_set = localStorage.getItem("set");
+  if (is_set == "yes") {
+    set = true;
+  }
+  else {
+    set = false;
+  }
+
+  function showtoast()
+  {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+
+  function showtoast2()
+  {
+    var x = document.getElementById("snackbar2");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+
+  function nclient()
+  {
+    window.location='registration.html'
+  }
+
+  let user;
+  let client_info;
+  user = JSON.parse(localStorage.getItem("clients"));
+  client_info = JSON.parse(localStorage.getItem("clients_info"));
+  let me;
+  me = "admin@gmail.com";
+  let my_pwd;
+  my_pwd = "admin";
+
+  function login() 
+  {
+    let username;
+    username = document.getElementById("uname").value;
+    let password;
+    password = document.getElementById("psw").value;
+    if (username == me) {
+      if (password == my_pwd) {
+        window.location='recog.html';
+      }
+      else {
+        showtoast2();
+      }
+    }
+    else if (set == true) {
+      if (user.includes(username) == true)
+      {
+        for (i = 0; i < client_info.length; i++) {
+          if (client_info[i].includes(username)) {
+            let usp = [];
+            usp = client_info[i].split("&");
+            if (password == usp[1])
+            {
+              window.location='recog.html';
+            }
+            else {
+              showtoast2();
+            }
+          }
+        }
+      }
+    }
+    else
+    {
+      showtoast();
+    }
+  }
+</script>
+
+</head>
+<body>
+
+<div class="topnav">
+  <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+  <a href="tech.html">Technology</a>
+  <a href="about.html">About</a>
+</div>
+
+<div class="btn-group" style="margin-top: 180px;">
+  <button onclick="document.getElementById('mod').style.display='block'" class="button"><span>Existing Customer</span></button>
+  <button onclick="nclient()" class="button"><span>New Customer</span></button>
+</div>
+
+<!-- The Modal -->
+<div id="mod" class="modal">
+  <span onclick="document.getElementById('mod').style.display='none'"
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" onsubmit="return false">
+    <div class="container">
+      <h1 style="margin-left: 35px;">Sign In</h1>
+      <label for="uname"><b>Username</b></label><br>
+      <input type="text" placeholder="Enter Email" name="uname" id="uname" required><br><br>
+
+      <label for="psw"><b>Password</b></label><br>
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required><br>
+
+      
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+      <br><br>
+    </div>
+
+    <div class="container" style="margin-left: 35px;">
+      <span class="psw"><a href="#">Forgot password?</a></span>
+    </div>
+    <button onclick="login()" class="loginbtn">LOG IN</button>
+    <br><br>
+    <span style="margin-left: 10px;" class="psw">Don't have an account? <a href="registration.html">Sign Up</a></span>
+    <div id="snackbar">Could not find this User</div>
+    <div id="snackbar2">Incorrect Password Entered</div>
+  </form>
+</div>
+
+</body>
+</html>
