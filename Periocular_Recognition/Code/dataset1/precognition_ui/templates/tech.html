@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image: url("{{url_for('static', filename='p.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 20px;
+  text-align: center;
+  background-color: #00ffff;
+  color: rgb(0, 0, 0);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+}
+      
+.topnav a  {
+    float: right;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+      
+.topnav a:hover {
+    background-color: rgb(158, 81, 230);
+    color: black;
+}
+      
+.topnav a.home {
+    float: left;
+    background-color: #000000;
+    padding: 7px;
+}
+
+.topnav a.active {
+    background-color: #033d3d;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+
+</style>
+
+      
+<div class="topnav">
+    <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+    <a class="active" href="tech.html">Technology</a>
+    <a href="about.html">About</a>
+</div>
+
+<div class="about-section">
+    <h1 style="font-size: 40px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Technologies & Requirements</h1>
+</div>
+
+<div class="w3-container" style="padding: 0%;">
+  <ul class="w3-ul w3-card-4">
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">Python</span><br>
+        <span>Backend Source Code</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">Deep Learning & Machine Learning</span><br>
+        <span>Convolution Neural Network (VGG16), dlib Facial landmark detector, K Nearest Neighbours Classifier</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">Tensorflow, Keras, SciKit</span><br>
+        <span>VGG16 execution & KNN Algorithm</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">OpenCV</span><br>
+        <span>Basic Image Manipulations</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">Google Colab & Google Drive</span><br>
+        <span>Code Execution and Backend Database</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">HTML, CSS, JavaScript</span><br>
+        <span>Frontend User Interface</span>
+      </div>
+    </li>
+
+    <li class="w3-bar" style="padding: 4px 16px;">
+      <img src="{{url_for('static', filename='tech.png')}}" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+      <div class="w3-bar-item">
+        <span class="w3-large">Flask</span><br>
+        <span>Frontend & Backend Integration</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+</head>
+</body>
+</html>

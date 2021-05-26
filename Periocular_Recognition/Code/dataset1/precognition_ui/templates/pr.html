@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image: url("{{url_for('static', filename='p.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+input[type=file]{
+    padding:10px;
+    background:#e2e2e2;
+    width: 85%;
+    height: 60%;
+    position: absolute;
+    left: 60px;
+    top: 40px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  z-index: 1;
+  background-color: rgb(97, 96, 96);
+  color: rgb(255 255 255);
+  padding: 10px;
+  margin-left: 400px;
+  font-size: 20px;
+  position: absolute;
+  top: 8%;
+  width: 200px;
+  text-align: center;
+  left: -90px;
+  opacity: 0.9;
+}
+
+
+input[type=file]::-webkit-file-upload-button:hover {
+  background-color: #000000;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.topnav {
+overflow: hidden;
+background-color: rgb(0, 0, 0);
+}
+      
+.topnav a  {
+    float: right;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+      
+.topnav a:hover {
+    background-color: rgb(158, 81, 230);
+    color: black;
+}
+      
+.topnav a.home {
+    float: left;
+    background-color: #000000;
+    padding: 7px;
+}
+
+.topnav a.active {
+    background-color: #033d3d;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 60%; /* Full width */
+  height: 70%; /* Full height */
+  background-color: rgb(238, 15, 15); /* Fallback color */
+  background-color: rgb(126, 242, 250); /* Black w/ opacity */
+  padding-top: 80px;
+  margin-top: 95px;
+  margin-left: 310px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-image: url("{{url_for('static', filename='login.jpg') }}");
+  background-repeat: no-repeat;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  height: 100%;
+  margin-top: -40px;
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 10px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #000000;
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 40px;
+  padding: 50px;
+  width: 800px;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 100px;
+  position: absolute;
+  top: 300px;
+  margin-left: calc(50% - 400px);
+}
+#output {
+    visibility: hidden;
+}
+
+#output.show {
+    visibility: visible;
+}
+
+#choice {
+    visibility: hidden;
+}
+
+#choice.show {
+    visibility: visible;
+}
+
+#rec {
+  visibility: hidden;
+  border-radius: 4px;
+  background-color: #f394ff;
+  border: none;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 30px;
+  padding: 20px;
+  width: 300px;
+  transition: all 0.5s;
+  cursor: pointer;
+  position: absolute;
+  left: 600px;
+  top: 485px;
+  opacity:0.9;
+}
+
+#rec.show {
+    visibility: visible;
+}
+
+#rec.show:hover {
+    background-color: #c900e4;
+}
+
+#output.show {
+    visibility: visible;
+}
+
+.button:hover {
+  background-color: #ff0000;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+#loader {
+  visibility: hidden;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 15px solid blue;
+  border-right: 15px solid rgb(1, 255, 255);
+  border-bottom: 15px solid rgb(49, 178, 238);
+  border-left: 15px solid rgb(5, 41, 87);
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  left: 690px;
+  top: 320px;
+}
+
+#loader.show {
+    visibility: visible;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+<script>
+
+var loadFile = function(event) {
+    var r = document.getElementById('rec');
+    r.className="show";
+    var c = document.getElementById('choice');
+    c.className="show";
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.className="show";
+    output.onload = function() {
+    URL.revokeObjectURL(output.src) // free memory
+    }
+  }
+
+  function load() {
+        var x = document.getElementById("loader");
+        x.className="show";
+    }
+
+  function rec() {
+    load()
+    let fileName = document.getElementById('dd').value.split('\\');
+    fileName=fileName[fileName.length-1];
+    fileName = String(fileName);
+    window.location = '/run.html?'+'filename='+fileName;
+  }
+
+</script>
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+            <a href="tech.html">Technology</a>
+            <a href="about.html">About</a>
+        </div>
+        
+        <div style="margin-top: 170px;">
+            <button class="button" onclick="document.getElementById('mod').style.display='block'"><span>Upload Image</span></button>
+        </div>
+        <!-- The Modal -->
+        <div id="mod" class="modal">
+            <span onclick="document.getElementById('mod').style.display='none'"
+        class="close" title="Close Modal">&times;</span>
+        <input type="file" id="dd" accept="image/*" onchange="loadFile(event)" style="
+        border: #343438;
+        height: 200px;
+        width: 800px;
+        border-style: dashed;
+        border-width: 3px;
+        margin-left: 60px;
+        margin-top: -100px;
+        background: #f6f6f6;
+        position: absolute;
+        top: 23%;
+        left: -10px;
+        color: #c91111d0;" onsubmit="return false"/>
+        <hr style="border-color: gray; z-index: 1; width: 320px; position: absolute; left: 12%; top: 22%;">
+        <p style="position: absolute; left: 48%; top: 19%; z-index: 1;">Or</p>
+        <hr style="border-color: gray; z-index: 1; width: 320px; position: absolute; left: 51%; top: 22%;">
+        <p style="position: absolute; left: 44%; top: 28%; font-size: 20px;">Drag it here</p>
+        <p id="choice" style="position: absolute;top: 45%;left: 400px;font-size: 20px;">Chosen Image:</p>
+        <img style="position: absolute;
+        left: 335px;
+        top: 310px;-webkit-box-align: center;height: 250px;width: 250px;z-index: -1;" id="output"/>
+        <button id="rec" onclick="rec()" class="rec">Recognize</button>
+        <div id="loader"></div>
+        </div>
+    </body>
+</html>
+
+
+

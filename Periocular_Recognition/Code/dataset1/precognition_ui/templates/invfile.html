@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background-image: url("{{url_for('static', filename='p.jpg') }}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+}
+      
+.topnav a  {
+    float: right;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+      
+.topnav a:hover {
+    background-color: rgb(158, 81, 230);
+    color: black;
+}
+      
+.topnav a.home {
+    float: left;
+    background-color: #000000;
+    padding: 7px;
+}
+
+.topnav a.active {
+    background-color: #033d3d;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.modal2 {
+  display: block; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: -1; /* Sit on top */
+  left: 200px;
+  top: 70px;
+  width: 74%; /* Full width */
+  height: 630px; /* Full height */
+  background-color: rgb(74, 0, 105); /* Black w/ opacity */
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 150px;
+  top: 0;
+  width: 40%; /* Full width */
+  height: 70%; /* Full height */
+  background-color: rgb(126, 242, 250); /* Black w/ opacity */
+  padding-top: 80px;
+  margin-top: 95px;
+  margin-left: 310px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-image: url("{{url_for('static', filename='login.jpg') }}");
+  background-repeat: no-repeat;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  height: 100%;
+  margin-top: -40px;
+}
+
+#backrec {
+  border-radius: 4px;
+  background-color: #000000;
+  border: none;
+  color: rgb(255 255 255);
+  text-align: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 30px;
+  padding: 30px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  position: absolute;
+  left: 200px;
+  top: 250px;
+  opacity: 0.9;
+}
+
+#backrec:hover {
+    background-color: #3d0017;
+}
+</style>
+
+<script>
+    function backrec() {
+        window.location = "pr.html"
+    }
+</script>
+ 
+<div class="topnav">
+    <a class="home" href="ui.html" ><img src="{{url_for('static', filename='pr.jpg')}}" height="30px"></a>
+    <a href="tech.html">Technology</a>
+    <a href="about.html">About</a>
+</div>
+
+<div id="mod2" class="modal2">
+<div id="mod" class="modal">
+    <h1 style="
+    font-size: 50px;
+    text-align: center;
+    position: absolute;">YOU HAVE ENTERED AN INVALID FILE</h1>
+    <button id="backrec" onclick="backrec()" class="backrec">Back to Recognize</button>
+</div>
+</div>
+</head>
+</body>
+</html>
